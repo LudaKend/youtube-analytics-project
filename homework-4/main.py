@@ -1,4 +1,4 @@
-from src.video import Video, PLVideo
+from src.Video import Video, PLVideo
 
 if __name__ == '__main__':
     # Создаем два экземпляра класса
@@ -6,3 +6,7 @@ if __name__ == '__main__':
     video2 = PLVideo('4fObz_qw9u4', 'PLv_zOGKKxVph_8g2Mqc3LMhj0M_BfasbC')
     assert str(video1) == 'GIL в Python: зачем он нужен и как с этим жить'
     assert str(video2) == 'MoscowPython Meetup 78 - вступление'
+
+    #print(video1.__dict__)
+    #print(video1.__repr__)
+    #print(video2.__repr__)

@@ -14,7 +14,7 @@ class Channel:
     def __init__(self, channel_id: str):
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
         self.channel_id = channel_id
-        self.dict_channel = self.get_service().channels().list(id=self.channel_id, part='snippet,statistics').execute()
+        self.dict_channel = self.get_service().channels().list(id=self.video_id, part='snippet,statistics').execute()
         self.title = self.dict_channel['items'][0]['snippet']['title']
         self.description = self.dict_channel['items'][0]['snippet']['description']
         self.url = self.dict_channel['items'][0]['snippet']['thumbnails']['default']['url']
