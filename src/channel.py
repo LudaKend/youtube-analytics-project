@@ -53,7 +53,7 @@ class Channel:
 
     def __add__(self, other):
         '''Метод срабатывает, когда используется оператор сложения.
-	В параметре other хранится то, что справа от знака +'''
+	    В параметре other хранится то, что справа от знака +'''
         return int(self.subscriber_count) + int(other.subscriber_count)
 
     def __sub__(self, other):
