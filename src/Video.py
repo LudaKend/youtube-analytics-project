@@ -7,6 +7,14 @@ from src.channel import Channel
   # - количество просмотров: view_count
   # - количество лайков: like_count
 
+class VideoIDNotFound(Exception):
+    def __init__(self, *args, **kwargs):
+        print(*args)
+        self.message = 'Видео с таким ID не найдено!'
+        #self.message = args[0] if args else None
+    def __str__(self):
+        return self.message
+
 class Video(Channel):
 
     def __init__(self, video_id):
@@ -16,11 +24,22 @@ class Video(Channel):
                                                                     'contentDetails,'
                                                                     'topicDetails',
                                                                id=video_id).execute()
+        #print(self.dict_channel)
+        if self.dict_channel['items'] == []:
+            self.title = None
+            self.url = None
+            self.view_count = None
+            self.like_count = None
+            raise VideoIDNotFound
 
-        self.title = self.dict_channel['items'][0]['snippet']['title']
-        self.url = self.dict_channel['items'][0]['snippet']['thumbnails']['default']['url']
-        self.view_count = self.dict_channel['items'][0]['statistics']['viewCount']
-        self.like_count = self.dict_channel['items'][0]['statistics']['likeCount']
+        else:
+            print('Код, который выполняется, когда не возникло исключений.')
+            self.title = self.dict_channel['items'][0]['snippet']['title']
+            self.url = self.dict_channel['items'][0]['snippet']['thumbnails']['default']['url']
+            self.view_count = self.dict_channel['items'][0]['statistics']['viewCount']
+            self.like_count = self.dict_channel['items'][0]['statistics']['likeCount']
+
+
 
     def __str__(self):
         return self.title
@@ -45,3 +64,5 @@ class PLVideo(Video):
 
     def __repr__(self):
         return f'{self.video_id}, {self.playlist_id}'
+
+
